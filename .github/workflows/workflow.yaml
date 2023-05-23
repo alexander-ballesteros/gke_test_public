@@ -42,8 +42,7 @@ jobs:
     - run: |-
         gcloud --quiet auth configure-docker
 
-     - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
+    - uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: 'projects/798501315561/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         service_account: 'sadestro@eminent-monitor-387120.iam.gserviceaccount.com'        
