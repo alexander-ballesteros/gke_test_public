@@ -42,11 +42,18 @@ jobs:
     - run: |-
         gcloud --quiet auth configure-docker
 
-    # Get the GKE credentials so we can deploy to the cluster
-    - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
+     - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
       with:
         workload_identity_provider: 'projects/798501315561/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         service_account: 'sadestro@eminent-monitor-387120.iam.gserviceaccount.com'        
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
+      with:
+        cluster_name: 'destrotestgkecluster'
+        project_id: eminent-monitor-387120
+        location: us-east1-b
 
     # Build the Docker image
     - name: Build
